@@ -3228,6 +3228,26 @@
         }
         .doc-pair { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .doc-pair .doc-link { margin-top: 0.7rem; }
+        /* 기획서 성장 기록: 초기 문서와 최근 문서 비교 */
+        .growth-pair { margin-top: 1.2rem; }
+        .page-right > .growth-pair:first-child { margin-top: 0.2rem; }
+        .growth-pair h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.08rem; font-weight: 800; }
+        .g-no { font-size: 0.85rem; font-weight: 900; color: var(--accent-text); }
+        .g-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 0.5rem; }
+        .g-figs figure { margin: 0; }
+        .g-figs a { display: block; }
+        .g-figs img { display: block; width: 100%; height: auto; border: 2px solid var(--ink); border-radius: 6px; background: #fff; transition: transform 0.2s; }
+        .g-figs a:hover img { transform: translateY(-2px); }
+        .g-figs figcaption { margin-top: 0.3rem; font-size: 0.8rem; font-weight: 700; color: var(--ink); }
+        .g-tag { display: inline-block; margin-right: 0.35rem; padding: 0 0.4rem; border: 1.5px solid var(--ink); border-radius: 5px; background: #e8eff8; font-size: 0.75rem; }
+        .g-tag.is-new { background: var(--highlight); }
+        .g-note { margin-top: 0.3rem; font-size: 0.9rem; line-height: 1.55; color: var(--ink); }
+        .g-note b { display: inline-block; min-width: 2.4rem; margin-right: 0.3rem; font-size: 0.8rem; color: var(--pencil); }
+        .g-note b.is-new { color: var(--accent-text); }
+        @media (max-width: 640px) {
+            .g-figs { gap: 0.4rem; }
+            .g-note { font-size: 0.86rem; }
+        }
     </style>
 </head>
 <body>
@@ -3753,6 +3773,55 @@
             </div>
         </section>
 
+        <!-- 기획서 성장 기록 -->
+        <section id="growth" class="spread">
+            <div class="page page-left">
+                <p class="chapter reveal">§ 4.5 Growth</p>
+                <h2 class="page-title reveal">기획서 <span class="marker">성장 기록</span></h2>
+                <p class="page-desc reveal">초기에 쓴 비주얼 가이드와 최근 기획서를 같은 항목끼리 나란히 놓았습니다. 최근 기획서 4개는 모두 v1부터 v4까지 고쳐 쓴 변경 이력이 있고, 한 문서를 일주일 안팎으로 다듬었습니다.</p>
+                <article class="growth-pair reveal">
+                    <h3><span class="g-no">01</span>원페이지 기획서</h3>
+                    <div class="g-figs">
+                        <figure><a href="growth/old_onepage.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/old_onepage.jpg" alt="초기 문서 원페이지 기획서" loading="lazy"></a><figcaption><b class="g-tag">초기</b>ZZZ 비주얼 가이드</figcaption></figure>
+                        <figure><a href="growth/new_onepage.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/new_onepage.jpg" alt="최근 문서 원페이지 기획서" loading="lazy"></a><figcaption><b class="g-tag is-new">최근</b>기사의 여행 시스템 기획서</figcaption></figure>
+                    </div>
+                    <p class="g-note"><b>초기</b>표 여러 개에 작은 글씨를 채워 넣어 무엇이 핵심인지 보이지 않았습니다.</p>
+                    <p class="g-note"><b class="is-new">최근</b>맨 위에 한 줄 요약을 두고 기본 정보, 게임 특징, 비주얼 컨셉, 1판 흐름으로 나눠 한눈에 읽히게 했습니다.</p>
+                </article>
+                <article class="growth-pair reveal">
+                    <h3><span class="g-no">02</span>UI 화면 설명</h3>
+                    <div class="g-figs">
+                        <figure><a href="growth/old_ui.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/old_ui.jpg" alt="초기 문서 UI 화면 설명" loading="lazy"></a><figcaption><b class="g-tag">초기</b>ZZZ 비주얼 가이드</figcaption></figure>
+                        <figure><a href="growth/new_ui.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/new_ui.jpg" alt="최근 문서 UI 화면 설명" loading="lazy"></a><figcaption><b class="g-tag is-new">최근</b>기사의 여행 시스템 기획서</figcaption></figure>
+                    </div>
+                    <p class="g-note"><b>초기</b>대략적인 화면 틀에 번호를 붙이고 역할만 짧게 적었습니다.</p>
+                    <p class="g-note"><b class="is-new">최근</b>실제 게임 화면에 번호를 달고 표에 이름, 유형, 기능을 한 줄씩 정리해 바로 구현할 수 있게 했습니다.</p>
+                </article>
+                <span class="page-no">— 13 —</span>
+            </div>
+            <div class="page page-right">
+                <article class="growth-pair reveal">
+                    <h3><span class="g-no">03</span>근거와 수치</h3>
+                    <div class="g-figs">
+                        <figure><a href="growth/old_color.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/old_color.jpg" alt="초기 문서 근거와 수치" loading="lazy"></a><figcaption><b class="g-tag">초기</b>ZZZ 비주얼 가이드</figcaption></figure>
+                        <figure><a href="growth/new_price.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/new_price.jpg" alt="최근 문서 근거와 수치" loading="lazy"></a><figcaption><b class="g-tag is-new">최근</b>가십하버 재화경제 분석서</figcaption></figure>
+                    </div>
+                    <p class="g-note"><b>초기</b>색상 견본과 "~를 의도" 문장만 있어 왜 그렇게 정했는지 근거가 없었습니다.</p>
+                    <p class="g-note"><b class="is-new">최근</b>회차별 가격을 표로 정리하고 그래프로 단가 변화를 보여 준 뒤, 결론을 한 줄 요약으로 먼저 적었습니다.</p>
+                </article>
+                <article class="growth-pair reveal">
+                    <h3><span class="g-no">04</span>캐릭터 비주얼</h3>
+                    <div class="g-figs">
+                        <figure><a href="growth/old_character.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/old_character.jpg" alt="초기 문서 캐릭터 비주얼" loading="lazy"></a><figcaption><b class="g-tag">초기</b>ZZZ 비주얼 가이드</figcaption></figure>
+                        <figure><a href="growth/new_character.jpg" target="_blank" rel="noopener noreferrer"><img src="growth/new_character.jpg" alt="최근 문서 캐릭터 비주얼" loading="lazy"></a><figcaption><b class="g-tag is-new">최근</b>에픽세븐 캐릭터 기획서</figcaption></figure>
+                    </div>
+                    <p class="g-note"><b>초기</b>참고 이미지를 칸 4개에 나눠 붙이고 설명은 한 줄씩만 달았습니다.</p>
+                    <p class="g-note"><b class="is-new">최근</b>직접 기획한 캐릭터 그림에 번호를 찍고 부위마다 디자인 포인트를 하나씩 연결했습니다.</p>
+                </article>
+                <span class="page-no">— 14 —</span>
+            </div>
+        </section>
+
         <!-- 이력서 -->
         <section id="resume" class="spread">
             <div class="page page-left">
@@ -3780,7 +3849,7 @@
                     <div><dt>자격</dt><dd>한국사능력검정시험 <b class="tag-r">1급</b></dd></div>
                     <div><dt>어학</dt><dd>G-TELP Level 2 <b class="tag-r">68점</b></dd></div>
                 </dl>
-                <span class="page-no">— 13 —</span>
+                <span class="page-no">— 15 —</span>
             </div>
             <div class="page page-right">
                 <h3 class="sub-title reveal">프로젝트 경험</h3>
@@ -3799,7 +3868,7 @@
                     <div><dt>Unity</dt><dd>UI, 오브젝트 배치, 데이터 값 변경</dd></div>
                     <div><dt>Claude</dt><dd>기획 검증용 프로토타입 개발</dd></div>
                 </dl>
-                <span class="page-no">— 14 —</span>
+                <span class="page-no">— 16 —</span>
             </div>
             <svg class="deco" style="right:-80px; top:-48px; transform:rotate(-160deg);" width="300" height="160" viewBox="0 0 300 160" aria-hidden="true">
                 <path d="M10 152 A140 140 0 0 1 290 152 Z" fill="rgba(140, 190, 255, 0.38)" stroke="rgba(30, 80, 150, 0.6)" stroke-width="2"/>
@@ -3844,7 +3913,7 @@
                     <h3>구현까지 고려하는 기획</h3>
                     <p>프로그래밍을 직접 경험하며 기능을 조건, 상태, 예외 단위로 나눠 설계하는 법을 익혔습니다. 프로그래머가 의도를 빠르게 파악하고 구현할 수 있는 기획을 합니다.</p>
                 </div>
-                <span class="page-no">— 15 —</span>
+                <span class="page-no">— 17 —</span>
             </div>
             <div class="page page-right">
                 <div class="letter-block cl-item reveal" data-n="04">
@@ -3864,7 +3933,7 @@
                     <p>협업자가 일하기 편한 방식을 고민하고, 시스템 설계와 게임 분석이라는 전문성을 키우겠습니다. 유저 경험과 사업성 사이의 균형을 실제 성과로 증명하겠습니다.</p>
                 </div>
                 <p class="signature reveal">2026년, <strong>김규장</strong></p>
-                <span class="page-no">— 16 —</span>
+                <span class="page-no">— 18 —</span>
             </div>
             <svg class="deco" style="left:-100px; top:-40px; transform:rotate(-78deg);" width="260" height="260" viewBox="0 0 260 260" aria-hidden="true">
                 <path d="M8 252 L8 8 L252 252 Z M46 214 L46 100 L160 214 Z" fill-rule="evenodd" fill="rgba(140, 190, 255, 0.38)" stroke="rgba(30, 80, 150, 0.6)" stroke-width="2"/>
