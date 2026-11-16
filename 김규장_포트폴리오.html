@@ -3229,11 +3229,6 @@
         .doc-pair { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .doc-pair .doc-link { margin-top: 0.7rem; }
         /* 기획서 성장 기록: 초기 문서(빨간 칸)와 최근 문서(노란 칸) 비교 */
-        .g-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 1rem; }
-        .g-stats li { padding: 0.55rem 0.7rem; border-radius: 10px; background: #fff8cc; }
-        .g-stats span { display: block; font-size: 0.78rem; font-weight: 800; color: var(--pencil); }
-        .g-stats b { display: block; margin-top: 0.15rem; font-size: 1.02rem; font-weight: 900; color: var(--ink); }
-        .g-stats s { margin-right: 0.35rem; font-size: 0.82rem; font-weight: 700; color: var(--red-pen); text-decoration-thickness: 2px; }
         .growth-pair { margin-top: 1.1rem; }
         .page-right > .growth-pair:first-child, .chapter + .growth-pair { margin-top: 0.4rem; }
         .growth-pair h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem; font-weight: 900; }
@@ -3252,8 +3247,7 @@
         .g-chips li.is-bad { border: 1.5px dashed var(--red-pen); color: var(--red-pen); background: #fff; }
         .g-chips li.is-good { color: var(--ink); background: var(--highlight); }
         @media (max-width: 640px) {
-            .g-stats { grid-template-columns: 1fr; }
-            .g-row.g-old { grid-template-columns: 1fr; }
+                .g-row.g-old { grid-template-columns: 1fr; }
         }
         /* GIF: 마우스를 올렸을 때만 재생 */
         .proj-gifs figure { position: relative; }
@@ -3799,11 +3793,6 @@
                 <p class="chapter reveal">§ 04-2 Growth</p>
                 <h2 class="page-title reveal">기획서 <span class="marker">성장 기록</span></h2>
                 <p class="page-desc reveal">초기 비주얼 가이드와 최근 기획서 4개를 같은 항목끼리 비교했습니다. 빨간 칸은 초기의 약점, 노란 칸은 최근에 고친 부분입니다.</p>
-                <ul class="g-stats reveal">
-                    <li><span>"의도" 반복</span><b><s>35회</s> 4회 이하</b></li>
-                    <li><span>표</span><b><s>7개</s> 문서당 11~20개</b></li>
-                    <li><span>변경 이력</span><b><s>없음</s> v1~v4</b></li>
-                </ul>
                 <article class="growth-pair reveal">
                     <h3><span class="g-no">01</span>원페이지 기획서</h3>
                     <div class="g-row g-old">
