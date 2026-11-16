@@ -3004,6 +3004,23 @@
         }
         .cv-kws li.hot { background: var(--highlight); }
         .nb-cover.v2 .nb-actions { margin-top: 1.8rem; }
+        /* 표지 바로가기 */
+        .cv-jump { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
+        .cv-jump a {
+            display: flex; align-items: center; gap: 0.45rem;
+            padding: 0.55rem 0.75rem;
+            background: #fbfdff; color: #14233f;
+            border: 2px solid #14233f; border-radius: 10px;
+            box-shadow: 3px 3px 0 #14233f;
+            font-size: 0.92rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.3;
+            white-space: nowrap;
+            transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+        }
+        .cv-jump a b { font-size: 0.78rem; color: #1f5bd6; }
+        .cv-jump a:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #14233f; background: var(--highlight); }
+        @media (max-width: 640px) {
+            .cv-jump { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
         .nb-cover.v2 .press-start { margin: 1.4rem 0 0; border-top-color: rgba(255, 255, 255, 0.55); }
         .nb-cover.v2 .press-start span { opacity: 1; color: #ffffff; font-weight: 600; }
 
@@ -3040,7 +3057,7 @@
             align-items: center;
             gap: 0.5rem;
             height: 38px;
-            max-width: 50px;
+            max-width: 190px;
             padding: 0 0.85rem 0 0.8rem;
             overflow: hidden;
             white-space: nowrap;
@@ -3268,7 +3285,7 @@
 
     <header class="site-header">
         <div class="header-inner">
-            <a href="#main" class="logo"><span class="logo-mark">규</span><span class="logo-text">KYUJANG</span></a>
+            <a href="#main" class="logo" aria-label="표지로"><span class="logo-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h12a4 4 0 0 1 4 4v2a3 3 0 0 1-5.4 1.8L15 15H9l-1.6 1.8A3 3 0 0 1 2 15v-2a4 4 0 0 1 4-4z"/><path d="M7 12v2M6 13h2"/><circle cx="16" cy="12.5" r="0.6" fill="#ffffff"/><circle cx="18" cy="14" r="0.6" fill="#ffffff"/></svg></span></a>
             <nav class="tabs" aria-label="주요 메뉴">
                 <a href="#main">표지</a>
                 <a href="#featured">프로젝트</a>
@@ -3318,10 +3335,15 @@
                         <li>수리 논리력</li>
                         <li>빠른 학습과 반영</li>
                     </ul>
-                    <div class="actions nb-actions">
-                        <a href="#resume" class="btn btn-solid">이력서 펼치기</a>
-                        <a href="#coverletter" class="btn btn-paper">자기소개서 펼치기</a>
-                    </div>
+                    <p class="cv-kw-title">바로가기</p>
+                    <nav class="cv-jump" aria-label="표지 바로가기">
+                        <a href="#featured"><b>01</b>프로젝트</a>
+                        <a href="#traits"><b>02</b>나의 특징</a>
+                        <a href="#games"><b>03</b>게임 경험</a>
+                        <a href="#docs"><b>04</b>기획서</a>
+                        <a href="#resume"><b>05</b>이력서</a>
+                        <a href="#coverletter"><b>06</b>자기소개서</a>
+                    </nav>
                     <button type="button" class="press-start">
                         <strong>PRESS START</strong>
                         <span>포트폴리오 펼치기</span>
