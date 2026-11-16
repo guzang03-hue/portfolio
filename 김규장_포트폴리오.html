@@ -3021,7 +3021,7 @@
         }
             .cv-kws li { font-size: 1.05rem; padding: 0.55rem 1.1rem; }
 
-        /* ───────── 목차 책갈피 (오른쪽 고정) ───────── */
+        /* ───────── 목차 책갈피 (오른쪽 고정): 위쪽 인덱스 탭과 같은 공책 탭 ───────── */
         .bookmarks {
             position: fixed;
             right: 0;
@@ -3031,54 +3031,73 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 6px;
-            filter: drop-shadow(-2px 3px 0 rgba(20, 35, 63, 0.22));
+            gap: 4px;
         }
         .bookmarks a {
+            position: relative;
             display: flex;
             align-items: center;
-            gap: 0.55rem;
-            height: 40px;
-            max-width: 58px;
-            padding: 0 0.9rem 0 1.15rem;
+            gap: 0.5rem;
+            height: 38px;
+            max-width: 50px;
+            padding: 0 0.85rem 0 0.8rem;
             overflow: hidden;
             white-space: nowrap;
-            background: var(--bm, var(--highlight));
-            color: var(--ink);
+            border-radius: 10px 0 0 10px;
+            background: #e8eff8;
+            color: var(--pencil);
             font-size: 0.88rem;
-            font-weight: 800;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 11px 50%);
-            transition: max-width 0.35s var(--ease), padding 0.25s var(--ease);
+            font-weight: 600;
+            box-shadow: inset -6px 0 8px -6px rgba(60, 45, 20, 0.2), 0 6px 14px -8px rgba(20, 40, 80, 0.35);
+            transform: translateX(6px);
+            transition: max-width 0.35s var(--ease), transform 0.25s var(--ease), background-color 0.25s, color 0.25s;
         }
         .bm-no {
             flex: none;
-            width: 1.4rem;
-            font-size: 0.82rem;
-            font-weight: 900;
-            color: var(--ink);
+            width: 1.3rem;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--accent-text);
         }
         .bm-label { flex: none; }
         .bookmarks:hover a,
-        .bookmarks a:focus-visible,
-        .bookmarks a.is-active {
+        .bookmarks a:focus-visible {
             max-width: 190px;
         }
-        .bookmarks a.is-active,
         .bookmarks a:hover {
-            padding-right: 1.4rem;
+            transform: translateX(2px);
+            color: var(--ink);
         }
         .bookmarks a.is-active {
-            box-shadow: inset 0 -4px 0 var(--ink);
+            max-width: 190px;
+            background: var(--paper);
+            color: var(--ink);
+            font-weight: 700;
+            transform: translateX(0);
+            box-shadow: 0 6px 14px -8px rgba(20, 40, 80, 0.35);
         }
+        /* 위쪽 탭과 같은 파란 점 */
+        .bookmarks a.is-active .bm-no::before {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 0.3rem;
+            border-radius: 50%;
+            background: var(--accent-text);
+            vertical-align: middle;
+        }
+        .bookmarks a.is-active .bm-no { width: auto; }
         .bookmarks a:focus-visible { outline-offset: -4px; }
         @media (max-height: 640px) {
-            .bookmarks { gap: 3px; }
+            .bookmarks { gap: 2px; }
             .bookmarks a { height: 30px; font-size: 0.8rem; }
         }
         @media (max-width: 960px) {
-            .bookmarks a { height: 34px; max-width: 42px; padding: 0 0.5rem 0 0.95rem; }
-            .bookmarks:hover a { max-width: 42px; }
-            .bookmarks a.is-active { max-width: 50px; padding-right: 0.9rem; }
+            .bookmarks a { height: 32px; max-width: 38px; padding: 0 0.45rem 0 0.6rem; }
+            .bookmarks:hover a, .bookmarks a.is-active { max-width: 38px; }
+            .bookmarks a.is-active .bm-no::before { display: none; }
+            .bookmarks a.is-active { box-shadow: inset 3px 0 0 var(--accent-text), 0 6px 14px -8px rgba(20, 40, 80, 0.35); }
         }
         body.editing .bookmarks { display: none; }
         @media (max-width: 640px) {
@@ -3157,15 +3176,15 @@
     </header>
 
     <nav class="bookmarks" aria-label="목차 책갈피">
-        <a href="#main" style="--bm:#ffe27a;" title="표지"><span class="bm-no">00</span><span class="bm-label">표지</span></a>
-        <a href="#featured" style="--bm:#bcd4ff;" title="대표 프로젝트"><span class="bm-no">01</span><span class="bm-label">대표 프로젝트</span></a>
-        <a href="#projects" style="--bm:#ffc6cf;" title="기타 프로젝트"><span class="bm-no">02</span><span class="bm-label">기타 프로젝트</span></a>
-        <a href="#traits" style="--bm:#c4ecc8;" title="나의 특징"><span class="bm-no">03</span><span class="bm-label">나의 특징</span></a>
-        <a href="#games" style="--bm:#ffd3a8;" title="게임 경험"><span class="bm-no">04</span><span class="bm-label">게임 경험</span></a>
-        <a href="#characters" style="--bm:#d9ccff;" title="캐릭터, 툴"><span class="bm-no">05</span><span class="bm-label">캐릭터, 툴</span></a>
-        <a href="#docs" style="--bm:#fff27a;" title="기획서"><span class="bm-no">06</span><span class="bm-label">기획서</span></a>
-        <a href="#resume" style="--bm:#a9e4f0;" title="이력서"><span class="bm-no">07</span><span class="bm-label">이력서</span></a>
-        <a href="#coverletter" style="--bm:#f7c8e8;" title="자기소개서"><span class="bm-no">08</span><span class="bm-label">자기소개서</span></a>
+        <a href="#main" title="표지"><span class="bm-no">00</span><span class="bm-label">표지</span></a>
+        <a href="#featured" title="대표 프로젝트"><span class="bm-no">01</span><span class="bm-label">대표 프로젝트</span></a>
+        <a href="#projects" title="기타 프로젝트"><span class="bm-no">02</span><span class="bm-label">기타 프로젝트</span></a>
+        <a href="#traits" title="나의 특징"><span class="bm-no">03</span><span class="bm-label">나의 특징</span></a>
+        <a href="#games" title="게임 경험"><span class="bm-no">04</span><span class="bm-label">게임 경험</span></a>
+        <a href="#characters" title="캐릭터, 툴"><span class="bm-no">05</span><span class="bm-label">캐릭터, 툴</span></a>
+        <a href="#docs" title="기획서"><span class="bm-no">06</span><span class="bm-label">기획서</span></a>
+        <a href="#resume" title="이력서"><span class="bm-no">07</span><span class="bm-label">이력서</span></a>
+        <a href="#coverletter" title="자기소개서"><span class="bm-no">08</span><span class="bm-label">자기소개서</span></a>
     </nav>
 
     <main>
