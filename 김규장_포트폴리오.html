@@ -3013,9 +3013,10 @@
             border: 2px solid #14233f; border-radius: 10px;
             box-shadow: 3px 3px 0 #14233f;
             font-size: 0.92rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.3;
-            white-space: nowrap;
+            min-width: 0; flex-wrap: wrap; white-space: normal; overflow-wrap: anywhere;
             transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
         }
+        .cv-jump svg { width: 17px; height: 17px; flex: none; display: block; color: #14233f; }
         .cv-jump a b { font-size: 0.78rem; color: #1f5bd6; }
         .cv-jump a:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #14233f; background: var(--highlight); }
         @media (max-width: 640px) {
@@ -3057,7 +3058,7 @@
             align-items: center;
             gap: 0.5rem;
             height: 38px;
-            max-width: 190px;
+            max-width: 230px;
             padding: 0 0.85rem 0 0.8rem;
             overflow: hidden;
             white-space: nowrap;
@@ -3077,17 +3078,19 @@
             font-weight: 800;
             color: var(--accent-text);
         }
+        .bm-ico { width: 16px; height: 16px; flex: none; display: block; }
+        .bm-ico svg { width: 100%; height: 100%; display: block; }
         .bm-label { flex: none; }
         .bookmarks:hover a,
         .bookmarks a:focus-visible {
-            max-width: 190px;
+            max-width: 230px;
         }
         .bookmarks a:hover {
             transform: translateX(2px);
             color: var(--ink);
         }
         .bookmarks a.is-active {
-            max-width: 190px;
+            max-width: 230px;
             background: var(--paper);
             color: var(--ink);
             font-weight: 700;
@@ -3112,8 +3115,10 @@
             .bookmarks a { height: 30px; font-size: 0.8rem; }
         }
         @media (max-width: 960px) {
-            .bookmarks a { height: 32px; max-width: 38px; padding: 0 0.45rem 0 0.6rem; }
-            .bookmarks:hover a, .bookmarks a.is-active { max-width: 38px; }
+            .bookmarks a { height: 32px; width: 38px; max-width: 38px; padding: 0; justify-content: center; gap: 0; }
+            .bookmarks:hover a, .bookmarks a.is-active, .bookmarks a:focus-visible { max-width: 38px; }
+            .bookmarks .bm-no { display: none; }
+            .bookmarks .bm-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
             .bookmarks a.is-active .bm-no::before { display: none; }
             .bookmarks a.is-active { box-shadow: inset 3px 0 0 var(--accent-text), 0 6px 14px -8px rgba(20, 40, 80, 0.35); }
         }
@@ -3291,13 +3296,13 @@
     </header>
 
     <nav class="bookmarks" aria-label="목차 책갈피">
-        <a href="#main" title="표지"><span class="bm-no">00</span><span class="bm-label">표지</span></a>
-        <a href="#featured" title="프로젝트"><span class="bm-no">01</span><span class="bm-label">프로젝트</span></a>
-        <a href="#traits" title="나의 특징"><span class="bm-no">02</span><span class="bm-label">나의 특징</span></a>
-        <a href="#games" title="게임 경험"><span class="bm-no">03</span><span class="bm-label">게임 경험</span></a>
-        <a href="#docs" title="기획서"><span class="bm-no">04</span><span class="bm-label">기획서</span></a>
-        <a href="#resume" title="이력서"><span class="bm-no">05</span><span class="bm-label">이력서</span></a>
-        <a href="#coverletter" title="자기소개서"><span class="bm-no">06</span><span class="bm-label">자기소개서</span></a>
+        <a href="#main" title="표지"><span class="bm-no">00</span><span class="bm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M12 7h4"/></svg></span><span class="bm-label">표지</span></a>
+        <a href="#featured" title="프로젝트"><span class="bm-no">01</span><span class="bm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg></span><span class="bm-label">프로젝트</span></a>
+        <a href="#traits" title="나의 특징"><span class="bm-no">02</span><span class="bm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18v-2a6 6 0 1 1 6 0v2M9 18h6M10 21h4"/></svg></span><span class="bm-label">나의 특징</span></a>
+        <a href="#games" title="게임 경험"><span class="bm-no">03</span><span class="bm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="7" cy="7" r="1"/><circle cx="17" cy="7" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="7" cy="17" r="1"/><circle cx="17" cy="17" r="1"/></svg></span><span class="bm-label">게임 경험</span></a>
+        <a href="#docs" title="기획서"><span class="bm-no">04</span><span class="bm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 12h8M8 16h8"/></svg></span><span class="bm-label">기획서</span></a>
+        <a href="#resume" title="이력서"><span class="bm-no">05</span><span class="bm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="15" rx="2"/><circle cx="8" cy="11" r="2"/><path d="M5 17a3 3 0 0 1 6 0M15 10h4M15 14h4M9 2h6v3"/></svg></span><span class="bm-label">이력서</span></a>
+        <a href="#coverletter" title="자기소개서"><span class="bm-no">06</span><span class="bm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M16 3l5 5M9 15l1-5 8-8 5 5-8 8-6 1zM7 18h8"/></svg></span><span class="bm-label">자기소개서</span></a>
     </nav>
 
     <main>
@@ -3328,12 +3333,12 @@
                     </ul>
                     <p class="cv-kw-title">바로가기</p>
                     <nav class="cv-jump" aria-label="표지 바로가기">
-                        <a href="#featured"><b>01</b>프로젝트</a>
-                        <a href="#traits"><b>02</b>나의 특징</a>
-                        <a href="#games"><b>03</b>게임 경험</a>
-                        <a href="#docs"><b>04</b>기획서</a>
-                        <a href="#resume"><b>05</b>이력서</a>
-                        <a href="#coverletter"><b>06</b>자기소개서</a>
+                        <a href="#featured"><b>01</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>프로젝트</a>
+                        <a href="#traits"><b>02</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18v-2a6 6 0 1 1 6 0v2M9 18h6M10 21h4"/></svg>나의 특징</a>
+                        <a href="#games"><b>03</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="7" cy="7" r="1"/><circle cx="17" cy="7" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="7" cy="17" r="1"/><circle cx="17" cy="17" r="1"/></svg>게임 경험</a>
+                        <a href="#docs"><b>04</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 12h8M8 16h8"/></svg>기획서</a>
+                        <a href="#resume"><b>05</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="15" rx="2"/><circle cx="8" cy="11" r="2"/><path d="M5 17a3 3 0 0 1 6 0M15 10h4M15 14h4M9 2h6v3"/></svg>이력서</a>
+                        <a href="#coverletter"><b>06</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M16 3l5 5M9 15l1-5 8-8 5 5-8 8-6 1zM7 18h8"/></svg>자기소개서</a>
                     </nav>
                     <button type="button" class="press-start">
                         <strong>PRESS START</strong>
