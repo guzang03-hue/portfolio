@@ -3338,6 +3338,31 @@
             .main-proj > .photo,
             .main-proj > .mp-info { grid-column: 1; }
         }
+        /* 기타 프로젝트: 대표 이미지 | 설명 */
+        .mini-proj li {
+            display: grid;
+            grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+            gap: 1.2rem;
+            align-items: center;
+            padding: 1.3rem 0 1.4rem 2.6rem;
+        }
+        .page-right > .mini-proj:first-child { margin-top: 0; }
+        .mini-thumb {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            border: 2px solid var(--ink);
+            border-radius: 8px;
+            background: #0b0f17;
+            box-shadow: 3px 3px 0 rgba(20, 35, 63, 0.18);
+        }
+        .mini-body h3 { display: block; }
+        .mini-body .kicker { display: block; margin: 0.3rem 0 0.4rem; }
+        .mini-body .muted { line-height: 1.6; }
+        @media (max-width: 640px) {
+            .mini-proj li { grid-template-columns: 1fr; gap: 0.6rem; }
+        }
     </style>
 </head>
 <body>
@@ -3596,33 +3621,41 @@
                     <p class="page-desc reveal">대표작 외에 참여하거나 직접 만든 프로젝트입니다.</p>
                     <ol class="mini-proj reveal" style="counter-reset: mini 2;">
                         <li>
-                            <h3>기사의 여행</h3>
-                            <p class="kicker">체스 기반 퍼즐 | 1인 | 2026.10.13 — 11.03</p>
-                            <p class="muted">역할: 규칙, 메카닉스 설계 | <a class="play-link" href="https://guzang03-hue.github.io/Knight-Tour/" target="_blank" rel="noopener noreferrer">플레이하기</a></p>
-                            <div class="proj-gifs is-tall">
-                                <figure><img src="gif/poster/knight_stage20_clear.jpg" data-gif="gif/knight_stage20_clear.gif" alt="스테이지 클리어" loading="lazy"><figcaption>스테이지 클리어</figcaption></figure>
-                                <figure><img src="gif/poster/knight_stage48_rook.jpg" data-gif="gif/knight_stage48_rook.gif" alt="룩, 킹 기물 기믹" loading="lazy"><figcaption>룩, 킹 기물 기믹</figcaption></figure>
+                            <img class="mini-thumb" src="projects/knight_tour.jpg" alt="기사의 여행 게임 화면" loading="lazy">
+                            <div class="mini-body">
+                                <h3>기사의 여행</h3>
+                                <p class="kicker">체스 기반 퍼즐 | 1인 | 2026.10.13 — 11.03</p>
+                                <p class="muted">역할: 규칙, 메카닉스 설계 | <a class="play-link" href="https://guzang03-hue.github.io/Knight-Tour/" target="_blank" rel="noopener noreferrer">플레이하기</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="mini-thumb" src="projects/seulgi_farm.jpg" alt="슬기로운 재배 생활 대표 이미지" loading="lazy">
+                            <div class="mini-body">
+                                <h3>슬기로운 재배 생활</h3>
+                                <p class="kicker">시뮬레이션 | 3인 | 2026.07.06 — 07.20</p>
+                                <p class="muted">역할: UI, 뽑기 시스템, 밸런스 | <a class="play-link" href="https://github.com/guzang03-hue/portfolio/releases/download/downloads/Seulgi-Jaebae-Saenghwal_Ver01.zip" download>다운로드 (Windows, 173MB)</a></p>
                             </div>
                         </li>
                     </ol>
                     <span class="page-no">— 5 —</span>
                 </div>
                 <div class="page page-right">
-                    <ol class="mini-proj reveal" style="counter-reset: mini 3;">
+                    <ol class="mini-proj reveal" style="counter-reset: mini 4;">
                         <li>
-                            <h3>슬기로운 재배 생활</h3>
-                            <p class="kicker">시뮬레이션 | 3인 | 2026.07.06 — 07.20</p>
-                            <p class="muted">역할: UI, 뽑기 시스템, 밸런스 | <a class="play-link" href="https://github.com/guzang03-hue/portfolio/releases/download/downloads/Seulgi-Jaebae-Saenghwal_Ver01.zip" download>다운로드 (Windows, 173MB)</a></p>
+                            <img class="mini-thumb" src="projects/mapple_fly.jpg" alt="Mapple Fly 대표 이미지" loading="lazy" style="object-position: 50% 15%;">
+                            <div class="mini-body">
+                                <h3>Mapple Fly</h3>
+                                <p class="kicker">슈팅 | 4인 | 2026.06.18 — 06.28</p>
+                                <p class="muted">역할: 보스 슈팅 패턴 | <a class="play-link" href="https://www.youtube.com/watch?v=AF3n0-Uqcu8&amp;t=23s" target="_blank" rel="noopener noreferrer">플레이 영상</a></p>
+                            </div>
                         </li>
                         <li>
-                            <h3>Mapple Fly</h3>
-                            <p class="kicker">슈팅 | 4인 | 2026.06.18 — 06.28</p>
-                            <p class="muted">역할: 보스 슈팅 패턴 | <a class="play-link" href="https://www.youtube.com/watch?v=AF3n0-Uqcu8&amp;t=23s" target="_blank" rel="noopener noreferrer">플레이 영상</a></p>
-                        </li>
-                        <li>
-                            <h3>인디게임의 성공기</h3>
-                            <p class="kicker">비주얼 노벨 | 6인 | 2026.06.08 — 06.14</p>
-                            <p class="muted">역할: 일정 관리, 시스템 | <a class="play-link" href="https://guzang03-hue.github.io/dice-board/" target="_blank" rel="noopener noreferrer">플레이하기</a></p>
+                            <img class="mini-thumb" src="projects/indie_story.jpg" alt="인디게임의 성공기 대표 이미지" loading="lazy" style="object-position: 50% 20%;">
+                            <div class="mini-body">
+                                <h3>인디게임의 성공기</h3>
+                                <p class="kicker">비주얼 노벨 | 6인 | 2026.06.08 — 06.14</p>
+                                <p class="muted">역할: 일정 관리, 시스템 | <a class="play-link" href="https://guzang03-hue.github.io/dice-board/" target="_blank" rel="noopener noreferrer">플레이하기</a></p>
+                            </div>
                         </li>
                     </ol>
                     <span class="page-no">— 6 —</span>
