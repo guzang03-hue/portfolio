@@ -2781,56 +2781,6 @@
             }
         }
 
-        /* ───────── 편집 모드 (F2) ───────── */
-        body.editing :is(h1, h2, h3, p, li, dt, dd, a, small, strong, time, button, .num):hover {
-            outline: 2px dashed rgba(47, 111, 237, 0.55);
-            outline-offset: 3px;
-        }
-
-        body.editing :focus {
-            outline: 2px solid #2f6fed;
-            outline-offset: 3px;
-        }
-
-        .edit-bar {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 0.7rem 0.6rem 1rem;
-            background: #14233f;
-            color: #ffffff;
-            border-radius: 14px;
-            box-shadow: 0 12px 30px rgba(20, 35, 63, 0.35);
-            font-size: 0.9rem;
-        }
-
-        .edit-bar small {
-            color: #9fb2cc;
-        }
-
-        .edit-bar button {
-            padding: 0.4rem 0.8rem;
-            border: 0;
-            border-radius: 8px;
-            font: inherit;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .edit-bar .eb-save {
-            background: #f5c542;
-            color: #14233f;
-        }
-
-        .edit-bar .eb-exit {
-            background: rgba(255, 255, 255, 0.14);
-            color: #ffffff;
-        }
-    
         /* ───────── 한 쪽 압축 레이아웃 ───────── */
         .tool-cards.tool-grid { grid-template-columns: 1fr 1fr; gap: 1.1rem; margin-top: 1.75rem; }
         .tool-grid .tool-card { grid-template-columns: 52px 1fr; padding: 1.2rem 1.2rem 1.3rem; }
@@ -3123,7 +3073,6 @@
             .bookmarks a.is-active .bm-no::before { display: none; }
             .bookmarks a.is-active { box-shadow: inset 3px 0 0 var(--accent-text), 0 6px 14px -8px rgba(20, 40, 80, 0.35); }
         }
-        body.editing .bookmarks { display: none; }
         @media (max-width: 640px) {
             .tabs { min-width: 0; overflow-x: auto; scrollbar-width: none; }
             .tabs::-webkit-scrollbar { display: none; }
@@ -4159,7 +4108,6 @@
                 var start = null;
                 el.textContent = '0';
                 function step(t) {
-                    if (document.body.classList.contains('editing')) { el.textContent = target.toLocaleString(); return; }
                     if (!start) start = t;
                     var p = Math.min((t - start) / 1400, 1);
                     var eased = 1 - Math.pow(1 - p, 3);
@@ -4230,162 +4178,6 @@
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onScroll);
             onScroll();
-        })();
-    </script>
-    <script>
-        // 편집 모드: F2(또는 주소 끝에 #edit)로 켜고, 글자를 바로 고친 뒤 [저장]
-        (function () {
-            var bar = null;
-            var dirty = false;
-            var fileHandle = null;
-
-            function enter() {
-                if (document.body.classList.contains('editing')) return;
-                document.body.classList.add('editing');
-                document.body.setAttribute('contenteditable', 'true');
-                document.body.setAttribute('spellcheck', 'false');
-                document.querySelectorAll('.spread').forEach(function (s) { s.classList.add('is-open'); });
-                document.querySelectorAll('[data-count]').forEach(function (el) {
-                    el.textContent = parseInt(el.getAttribute('data-count'), 10).toLocaleString();
-                });
-                bar = document.createElement('div');
-                bar.className = 'edit-bar';
-                bar.setAttribute('contenteditable', 'false');
-                bar.innerHTML = '<span>✎ 편집 중 <small>글자를 눌러 고치세요</small></span>' +
-                    '<button type="button" class="eb-save">저장</button>' +
-                    '<button type="button" class="eb-exit">끝내기</button>';
-                bar.querySelector('.eb-save').addEventListener('click', save);
-                bar.querySelector('.eb-exit').addEventListener('click', exit);
-                document.body.appendChild(bar);
-            }
-
-            function exit() {
-                if (dirty && !confirm('저장하지 않은 수정이 있습니다. 그래도 편집을 끝낼까요?\n(수정 내용은 화면에 남지만, 파일에는 저장되지 않습니다)')) return;
-                document.body.classList.remove('editing');
-                document.body.removeAttribute('contenteditable');
-                document.body.removeAttribute('spellcheck');
-                if (bar) { bar.remove(); bar = null; }
-            }
-
-            // 저장할 HTML 만들기: 화면 상태(펼침, 편집 표시 등)는 빼고 원래 파일 모양으로
-            function buildHtml() {
-                document.querySelectorAll('[data-count]').forEach(function (el) {
-                    var n = parseInt(el.textContent.replace(/[^0-9]/g, ''), 10);
-                    if (!isNaN(n)) el.setAttribute('data-count', n);
-                });
-                var root = document.documentElement.cloneNode(true);
-                var body = root.querySelector('body');
-                body.classList.remove('editing');
-                body.removeAttribute('contenteditable');
-                body.removeAttribute('spellcheck');
-                root.querySelectorAll('[contenteditable], [spellcheck]').forEach(function (el) {
-                    el.removeAttribute('contenteditable');
-                    el.removeAttribute('spellcheck');
-                });
-                // 마우스 재생용 GIF 감싸개를 원래 모양(정지 이미지)으로 되돌림
-                root.querySelectorAll('.gif-wrap').forEach(function (w) {
-                    var img = w.querySelector('img');
-                    if (img) {
-                        if (img.getAttribute('data-still')) img.setAttribute('src', img.getAttribute('data-still'));
-                        img.removeAttribute('data-still');
-                        w.parentNode.insertBefore(img, w);
-                    }
-                    w.remove();
-                });
-                var b = root.querySelector('.edit-bar');
-                if (b) b.remove();
-                root.classList.remove('js');
-                root.querySelectorAll('.is-open, .is-flipping, .is-active').forEach(function (el) {
-                    el.classList.remove('is-open', 'is-flipping', 'is-active');
-                });
-                var progress = root.querySelector('.progress');
-                if (progress) progress.removeAttribute('style');
-                root.querySelectorAll('[class=""]').forEach(function (el) { el.removeAttribute('class'); });
-                if (root.getAttribute('class') === '') root.removeAttribute('class');
-                return '<!DOCTYPE html>\n' + root.outerHTML + '\n';
-            }
-
-            function save() {
-                var html = buildHtml();
-                var name = decodeURIComponent(location.pathname.split('/').pop()) || '김규장_포트폴리오.html';
-                if (window.showSaveFilePicker) {
-                    var pick = fileHandle ? Promise.resolve(fileHandle) : window.showSaveFilePicker({
-                        suggestedName: name,
-                        types: [{ description: 'HTML', accept: { 'text/html': ['.html'] } }]
-                    });
-                    pick.then(function (h) {
-                        fileHandle = h;
-                        return h.createWritable();
-                    }).then(function (w) {
-                        return w.write(html).then(function () { return w.close(); });
-                    }).then(function () {
-                        dirty = false;
-                        flash('저장했습니다 ✓');
-                    }).catch(function (e) {
-                        if (e && e.name === 'AbortError') return;
-                        download(html, name);
-                    });
-                } else {
-                    download(html, name);
-                }
-            }
-
-            function download(html, name) {
-                var a = document.createElement('a');
-                a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
-                a.download = name;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                dirty = false;
-                flash('다운로드 폴더에 저장했습니다 ✓');
-            }
-
-            function flash(msg) {
-                if (!bar) return;
-                var label = bar.querySelector('span');
-                var old = label.innerHTML;
-                label.textContent = msg;
-                setTimeout(function () { if (bar) label.innerHTML = old; }, 2000);
-            }
-
-            document.addEventListener('input', function () {
-                if (document.body.classList.contains('editing')) dirty = true;
-            });
-
-            // 편집 중에는 링크, 버튼을 눌러도 이동하지 않음
-            document.addEventListener('click', function (e) {
-                if (!document.body.classList.contains('editing')) return;
-                if (e.target.closest('.edit-bar')) return;
-                if (e.target.closest('a, button')) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                }
-            }, true);
-
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'F2') {
-                    e.preventDefault();
-                    if (document.body.classList.contains('editing')) exit(); else enter();
-                } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's' && document.body.classList.contains('editing')) {
-                    e.preventDefault();
-                    save();
-                }
-            });
-
-            window.addEventListener('beforeunload', function (e) {
-                if (dirty) { e.preventDefault(); e.returnValue = ''; }
-            });
-
-            if (location.hash === '#edit') enter();
-
-            // 붙여넣기는 서식 없이 글자만
-            document.addEventListener('paste', function (e) {
-                if (!document.body.classList.contains('editing')) return;
-                e.preventDefault();
-                var text = (e.clipboardData || window.clipboardData).getData('text/plain');
-                document.execCommand('insertText', false, text);
-            });
         })();
     </script>
     <script>
